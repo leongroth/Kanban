@@ -7,7 +7,7 @@ import UserIcon from "../assets/UserIcon"
 const UserButton = () => {
     const [user, setUser] = useState(<UserIcon />)
 
-
+    
 
   return (
     <div className="absolute left-[5%]">
