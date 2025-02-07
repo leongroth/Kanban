@@ -1,4 +1,4 @@
-import LoginForm from "./LoginForm"
+
 
 const Tasks = () => {
 
@@ -7,7 +7,6 @@ const Tasks = () => {
   return (
     <div>
       Tasks
-      <LoginForm />
     </div>
   )
 }
