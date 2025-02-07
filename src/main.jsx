@@ -6,7 +6,6 @@ import { createBrowserRouter, RouterProvider } from 'react-router'
 import Tasks from './components/Tasks.jsx'
 import Summary from './components/Summary.jsx'
 import UserButton from './components/UserButton.jsx'
-import Test from './Test.jsx'
 
 const router = createBrowserRouter([
   {path: "/", element: <Tasks />},
@@ -16,11 +15,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <div className='w-screen h-screen bg-white dark:bg-[#362E3E]'>
+    <div className='w-screen h-screen bg-white dark:bg-[#362E3E] transition-all duration-500'> 
       <UserButton />
       <Navbar />
       <RouterProvider router={router} />
-      <Test />
     </div>
   </StrictMode>,
 )

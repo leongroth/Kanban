@@ -2,18 +2,18 @@ import { navLinks } from "../content"
 
 const Navbar = () => {
   return (
-    <div className="w-screen h-[9vh] flex justify-center items-end">
-      <div className="w-[50vw] h-[8vh] bg-[#EFEFEF] dark:bg-[#484455] rounded-full inset-shadow-2xs flex items-center justify-between px-[1vw]">
-        <h1 className="font-bold text-[5vh] text-start w-fit text-black dark:text-white">Experience Pathways</h1>
-        <div className="flex">
+    <div className="w-screen h-[70px] flex justify-center items-end">
+      <div className="w-[960px] h-[60px] bg-[#EFEFEF] dark:bg-[#484455] rounded-full inset-shadow-2xs flex items-center justify-between pl-[10px] pr-[100px] transition-all duration-500">
+        <h1 className="font-bold text-4xl text-start w-fit text-black dark:text-white transition-all duration-500">Experience Pathways</h1>
+        <div className="flex gap-20">
             {navLinks.map((item) => {
               if(item.href == window.location.pathname || `/${item.href}` == window.location.pathname){
                 return (
-                  <a href={item.href} className="text-[3vh] underline font-semibold w-[10vw] text-center text-black dark:text-white">{item.label}</a>
+                  <a href={item.href} className="text-2xl underline font-semibold text-center text-black dark:text-white transition-all duration-500">{item.label}</a>
                 )
               } else {
                 return (
-                  <a href={item.href} className="text-[3vh] w-[10vw] text-center text-black dark:text-white">{item.label}</a>
+                  <a href={item.href} className="text-2xl text-center text-black dark:text-white transition-all duration-500">{item.label}</a>
                 )
               }
             })
