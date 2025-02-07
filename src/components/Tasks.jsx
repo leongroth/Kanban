@@ -1,12 +1,8 @@
-
-
 const Tasks = () => {
-
-  
 
   return (
     <div>
-      Tasks
+      tasks
     </div>
   )
 }

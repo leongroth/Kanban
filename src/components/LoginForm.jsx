@@ -9,7 +9,7 @@ const LoginForm = () => {
     const signIn = async() => {
         try {
             await signInWithEmailAndPassword(auth, email, password)
-            alert(email + " is signed in")
+            window.location.reload(false)
         }
         catch(err) {
             console.error(err)
@@ -17,14 +17,14 @@ const LoginForm = () => {
     }
 
   return (
-    <div className="w-full h-[80%] flex flex-col justify-center items-center">
+    <div className="w-full flex flex-col justify-center items-center gap-4 mt-[10px]">
         <h1 className="font-semibold text-black dark:text-white transition-all duration-500">LogIn</h1>
-        <div className="w-[300px]">
-            <h2 className="text-gray-500 dark:text-gray-200 transition-all duration-500" >Email</h2>
+        <div className="w-[300px] flex flex-col items-center">
+            <h2 className="text-gray-500 dark:text-gray-200 transition-all duration-500 w-full" >Email</h2>
             <input type="email" className="rounded-full w-full" onChange={(e) => setEmail(e.target.value)}/>
-            <h2 className="text-gray-500 dark:text-gray-200 transition-all duration-500" >Password</h2>
+            <h2 className="text-gray-500 dark:text-gray-200 transition-all duration-500 w-full" >Password</h2>
             <input type="password" className="rounded-full w-full" onChange={(e) => setPassword(e.target.value)}/>
-            <button className="w-[60px] h-[30px] rounded-full bg-[#C02BD4] text-white font-semibold" onClick={signIn}>Sign In</button>
+            <button className="w-[80px] h-[30px] rounded-full bg-[#C02BD4] text-white font-semibold my-[10px] drop-shadow-lg hover:bg-[#81298d]" onClick={signIn}>Sign In</button>
         </div>
     </div>
   )
