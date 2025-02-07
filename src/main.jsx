@@ -16,9 +16,11 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <UserButton />
-    <Navbar />
-    <RouterProvider router={router} />
-    <Test />
+    <div className='w-screen h-screen bg-white dark:bg-[#362E3E]'>
+      <UserButton />
+      <Navbar />
+      <RouterProvider router={router} />
+      <Test />
+    </div>
   </StrictMode>,
 )
