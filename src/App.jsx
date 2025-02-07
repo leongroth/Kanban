@@ -14,7 +14,7 @@ const App = () => {
     const [state, setState] = useState()
     
       onAuthStateChanged(auth, (user) => {
-              if(user){
+              if(auth.currentUser !== null){
                 setState(true)
               } else {
                 setState(false)
@@ -31,7 +31,7 @@ const App = () => {
   return (
     <div>
       <div className='w-screen h-screen bg-white dark:bg-[#362E3E] transition-all duration-500'> 
-        <UserButton />
+        <UserButton state={state}/>
         <Navbar />
         <RouterProvider router={router} />
       </div>

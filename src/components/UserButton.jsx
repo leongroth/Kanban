@@ -10,7 +10,7 @@ import LeonPic from '../assets/LeonPic.png'
 import FrostPic from '../assets/FrostPic.png'
 import SasPic from '../assets/SasPic.png'
 
-const UserButton = () => {
+const UserButton = (state) => {
 
 
   return (
@@ -24,8 +24,8 @@ const UserButton = () => {
                 <Popover.Positioner sideOffset={8} align="end">
                     <Popover.Popup className="bg-[#EFEFEF] dark:bg-[#484455] rounded-xl w-[400px] h-fit drop-shadow-lg flex flex-col items-center transition-all duration-500">
                         <DarmodeSwitch />
-                        <LoginForm />
-                        <Logout />
+                        test
+                        {test}
                     </Popover.Popup>
                 </Popover.Positioner>
             </Popover.Portal>
