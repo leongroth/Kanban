@@ -1,9 +1,10 @@
 import { Popover } from "@base-ui-components/react"
 import DarmodeSwitch from "./DarmodeSwitch"
+import LoginForm from "./LoginForm"
 
 const UserButton = () => {
   return (
-    <div className="absolute left-[5%] h-[9vh]">
+    <div className="absolute left-[5%]">
         <Popover.Root>
             <Popover.Trigger className="bg-[#EFEFEF] dark:bg-[#484455] drop-shadow-lg rounded-full w-[60px] h-[60px] mt-[10px] flex justify-center items-center transition-all duration-500">
                 <svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg" className="w-[30px] h-[30px] fill-black dark:fill-white transition-all duration-500">
@@ -14,15 +15,7 @@ const UserButton = () => {
                 <Popover.Positioner sideOffset={8} align="end">
                     <Popover.Popup className="bg-[#EFEFEF] dark:bg-[#484455] rounded-xl w-[400px] h-[200px] drop-shadow-lg flex flex-col items-center transition-all duration-500">
                         <DarmodeSwitch />
-                        <div className="w-full h-[80%] flex flex-col justify-center items-center">
-                            <h1 className="font-semibold text-black dark:text-white transition-all duration-500">LogIn</h1>
-                            <div className="w-[300px]">
-                                <h2 className="text-gray-500 dark:text-gray-200 transition-all duration-500">Email</h2>
-                                <input type="email" className="rounded-full w-full" />
-                                <h2 className="text-gray-500 dark:text-gray-200 transition-all duration-500">Password</h2>
-                                <input type="password" className="rounded-full w-full"/>
-                            </div>
-                        </div>
+                        <LoginForm />
                     </Popover.Popup>
                 </Popover.Positioner>
             </Popover.Portal>
