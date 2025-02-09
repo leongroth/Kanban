@@ -11,17 +11,6 @@ import { useState } from 'react'
 
 const App = () => {
 
-    const [state, setState] = useState()
-    
-      onAuthStateChanged(auth, (user) => {
-              if(auth.currentUser !== null){
-                setState(true)
-              } else {
-                setState(false)
-              }
-            })
-
-
 
     const router = createBrowserRouter([
         {path: "/", element: <Tasks />},
@@ -31,7 +20,7 @@ const App = () => {
   return (
     <div>
       <div className='w-screen h-screen bg-white dark:bg-[#362E3E] transition-all duration-500'> 
-        <UserButton state={state}/>
+        <UserButton/>
         <Navbar />
         <RouterProvider router={router} />
       </div>
