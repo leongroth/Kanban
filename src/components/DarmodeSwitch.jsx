@@ -1,12 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Moon from '../assets/Moon.svg'
 import Sun from '../assets/Sun.svg'
 
 
 const DarmodeSwitch = () => {
 
+    const darkmodeState = JSON.parse(localStorage.getItem('isDarkmode'))
+
     function toggleTheme(){
         document.documentElement.classList.toggle("dark")
+
+        if(darkmodeState){
+            localStorage.removeItem('isDarkmode')
+        } else {
+            localStorage.setItem('isDarkmode', JSON.stringify("true"))
+        }
     }
 
     return (
@@ -17,6 +25,9 @@ const DarmodeSwitch = () => {
                 <img src={Moon} className='hidden dark:block' />
             </div>
         </button>
+        <div>
+            {JSON.parse(localStorage.getItem('isDarkmode'))}
+        </div>
     </div>
     )
 }

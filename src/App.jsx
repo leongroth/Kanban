@@ -5,11 +5,18 @@ import UserButton from './components/UserButton.jsx'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from './firebase.jsx'
 import Navbar from './components/Navbar.jsx'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 
 
 const App = () => {
+
+  const state = JSON.parse(localStorage.getItem('isDarkmode'))
+  if(state == "true"){
+    document.documentElement.classList.toggle("dark")
+  } else {
+  }
+
 
 
     const router = createBrowserRouter([
@@ -17,10 +24,15 @@ const App = () => {
         {path: "/summary", element: <Summary />},
         ])
 
+  localStorage.setItem('test', JSON.stringify("acting"))
+
+  const storedData = localStorage.getItem('test')
+  const parsedData = JSON.parse(storedData)
+
   return (
     <div>
       <div className='w-screen h-screen bg-white dark:bg-[#362E3E] transition-all duration-500'> 
-        <UserButton/>
+        <UserButton />
         <Navbar />
         <RouterProvider router={router} />
       </div>
