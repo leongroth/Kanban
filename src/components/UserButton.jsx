@@ -16,6 +16,7 @@ import SasPic from '../assets/SasPic.png'
 
 const UserButton = () => {
     const [icon, setIcon] = useState(<UserIcon />)
+    const [form, setForm] = useState()
 
     const users = ["leongroth@gmail.com", "frost@gmail.com", "sas@gmail.com"]
     const profilePics = [LeonPic, FrostPic, SasPic]
@@ -24,8 +25,10 @@ const UserButton = () => {
         if(user){
             const index = users.indexOf(user.email)
             setIcon(<img src={profilePics[index]} />)
+            setForm(<Logout />)
         } else {
             setIcon(<UserIcon />)
+            setForm(<LoginForm />)
         }
       })
 
@@ -40,9 +43,7 @@ const UserButton = () => {
                 <Popover.Positioner sideOffset={8} align="end">
                     <Popover.Popup className="bg-[#EFEFEF] dark:bg-[#484455] rounded-xl w-[400px] h-fit drop-shadow-lg flex flex-col items-center transition-all duration-500">
                         <DarmodeSwitch />
-                        <LoginForm />
-                        <Logout />
-                        <div>{typeof test}</div>
+                        {form}
                         
                     </Popover.Popup>
                 </Popover.Positioner>
