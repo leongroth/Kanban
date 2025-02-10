@@ -1,5 +1,6 @@
 import { useState } from "react"
 import TestColumn from "./TestColumn"
+import { DndContext } from "@dnd-kit/core"
 
 
 const Summary = () => {
@@ -57,10 +58,11 @@ const Summary = () => {
   return (
     <div className="p-4">
       <div className="flex gap-8">
-        
+        <DndContext onDragEnd={handleDragEnd}>
         {COLUMNS.map((column) => {
           return <TestColumn key={column.id} column={column} tasks={tasks.filter(task => task.status === column.id)} />
         })}
+        </DndContext>
       </div>
     </div>
   )
