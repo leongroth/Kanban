@@ -5,8 +5,8 @@ const Tasks = () => {
 
 
   return (
-    <div className="flex justify-center items-center mt-20">
-      <Column title={"doing"}/>
+    <div className="flex gap-[5vw] justify-center mt-[20px]">
+      <TaskCard title={"test"} deadline={"12/5"} Qactive={true} Cactive={true} />
     </div>
   )
 }
