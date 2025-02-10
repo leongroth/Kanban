@@ -1,3 +1,5 @@
+import TaskCard from "./TaskCard"
+
 const Column = ({title}) => {
     const titleUpper = title.toUpperCase()
 
@@ -7,6 +9,7 @@ const Column = ({title}) => {
             <div className="w-[150px] h-[80px] absolute -left-[75px] top-[100px] -rotate-90">
                 <div className="flex justify-center items-center w-[150px] h-[80px]">
                     <h1 className="text-4xl font-semibold">{titleUpper}</h1>
+                    <TaskCard />
                 </div>
             </div>
         </div>
