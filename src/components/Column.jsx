@@ -13,7 +13,7 @@ const Column = ({column, tasks}) => {
         </div>
       </div>
       
-      <div className="flex flex-1 flex-col gap-[2vw] w-full h-full items-center pt-[2vw] overflow-y-scroll overflow-x-hidden" ref={setNodeRef}>{tasks.map((task => {
+      <div className="flex flex-1 flex-col gap-[2vw] w-full h-full items-center pt-[2vw] overflow-y-scroll overflow-x-hidden no-scrollbar" ref={setNodeRef}>{tasks.map((task => {
           return <TaskCard key={task.id} task={task}/>
       }))}</div>
     </div>

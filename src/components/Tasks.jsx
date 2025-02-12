@@ -1,6 +1,7 @@
 import { useState } from "react"
 import Column from "./Column"
-import { DndContext } from "@dnd-kit/core"
+import { DndContext, DragOverlay } from "@dnd-kit/core"
+import TaskCard from "./TaskCard"
 
 const Tasks = () => {
   const COLUMNS = [
@@ -37,8 +38,14 @@ const Tasks = () => {
   ]
 
   const [tasks, setTasks] = useState(INITIAL_TASKS)
+  const [activeId, setActiveId] = useState(null) 
+
+  const handleDragStart = (event) => {
+    setActiveId(event.active.id)
+  }
 
   const handleDragEnd = (event) => {
+    setActiveId(null)
     const {active, over} = event
 
     if(!over){return}
@@ -56,11 +63,37 @@ const Tasks = () => {
   return (
     <div className="p-4 flex justify-center">
       <div className="flex gap-8">
-        <DndContext onDragEnd={handleDragEnd}>
+        <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
         {COLUMNS.map((column) => {
           return <Column key={column.id} column={column} tasks={tasks.filter(task => task.status === column.id)} />
         })}
+          
+          <DragOverlay>
+          <div className="w-[21vw] h-[10vw] cursor-grab rounded-[20px] bg-white dark:bg-[#362E3E] p-4 shadow-lg hover:shadow-[0_0px_20px_rgba(129,41,141,1)] transition-all duration-500">
+            <h3 className="font-semibold text-lg text-black dark:text-white transition-all duration-500 text-center ">
+              {
+              tasks.map((task) => {
+                if(task.id === activeId)
+                return task.title
+              })}
+          </h3>
+            <p className="mt-2 tex-sm text-black dark:text-white transition-all duration-500">
+              {
+              tasks.map((task) => {
+                if(task.id === activeId)
+                return task.description
+              })}
+            </p>
+          </div>
+          </DragOverlay>
         </DndContext>
+        <div>
+          test
+          {tasks.map((task) => {
+            if(task.id === "2")
+            return task.title
+          })}
+        </div>
       </div>
     </div>
   )
