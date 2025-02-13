@@ -15,25 +15,29 @@ const Tasks = () => {
       id: "1",
       title: "Research Project",
       description: "Gather requirements and create initial documnentation",
-      status: "TODO" 
+      status: "TODO",
+      priority: 1
     },
     {
       id: "2",
       title: "Design System",
       description: "Create component library and design tokens",
-      status: "TODO" 
+      status: "TODO",
+      priority: 2
     },
     {
       id: "3",
       title: "API integration",
       description: "Implement REST API endpoints",
-      status: "DOING" 
+      status: "DOING",
+      priority: 3
     },
     {
       id: "4",
       title: "Testing",
       description: "Write unit tests for core functionality",
-      status: "DONE" 
+      status: "DONE",
+      priority: 4
     }
   ]
 

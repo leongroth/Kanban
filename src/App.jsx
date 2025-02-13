@@ -6,6 +6,7 @@ import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from './firebase.jsx'
 import Navbar from './components/Navbar.jsx'
 import { useEffect, useState } from 'react'
+import Test from './components/Test.jsx'
 
 
 
@@ -22,6 +23,7 @@ const App = () => {
     const router = createBrowserRouter([
         {path: "/", element: <Tasks />},
         {path: "/summary", element: <Summary />},
+        {path: "/test", element: <Test />},
         ])
 
   localStorage.setItem('test', JSON.stringify("acting"))
