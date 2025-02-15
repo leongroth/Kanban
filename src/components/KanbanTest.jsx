@@ -1,6 +1,6 @@
 import { closestCorners, DndContext, PointerSensor, useSensor, useSensors } from "@dnd-kit/core"
 import { arrayMove, SortableContext } from "@dnd-kit/sortable"
-import { useState } from "react"
+import { act, useState } from "react"
 import TestContainer from "./TestContainer"
 import TestItems from "./TestItems"
 
@@ -157,7 +157,7 @@ const KanbanTest = () => {
             const overItemIndex = overContainer.items.findIndex((item) => item.id === over.id)
 
             // If in the same container
-            i(activeContainerIndex === overContainerIndex){
+            if(activeContainerIndex === overContainerIndex){
                 let newItems = [...containers]
                 newItems[activeContainerIndex].items = arrayMove(newItem[activeContainerIndex].items, activeItemIndex, overItemIndex)
                 setContainers(newItems)
@@ -176,6 +176,31 @@ const KanbanTest = () => {
                 setContainers(newItems)
             }
         }
+
+        // Handling item drop into a container
+        if(active.id.toString().includes("item") && over?.id.toString().includes("container") && active && over && active.id !== over.id){
+            const activeContainer = findValueOfItems(active.id, 'item')
+            const overContainer = findValueOfItems(over.id, "container")
+
+            // If the active or over container is undefined
+            if(!activeContainer || !overContainer){return}
+
+            // Find the index of the active and over container
+            const activeContainerIndex = containers.findIndex((container) => container.id === activeContainer.id)
+            const overContainerIndex = containers.findIndex((container) => container.id === overContainer.id) 
+
+            // Find the index of the active item in the active container
+            const activeItemIndex = activeContainer.items.findIndex((item) => item.id === active.id)
+
+            let newItems = [...containers]
+            const [removedItem] = newItems[activeContainerIndex].items.splice(
+                activeItemIndex,
+                1
+            )
+            newItems[overContainerIndex].items.push(removedItem)
+            setContainers(newItems)
+        }
+        setActiveId(null)
     }
 
 
