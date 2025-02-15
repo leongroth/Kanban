@@ -1,6 +1,6 @@
 import { useState } from "react"
 import Column from "./Column"
-import { DndContext, DragOverlay } from "@dnd-kit/core"
+import { closestCorners, DndContext, DragOverlay } from "@dnd-kit/core"
 import TaskCard from "./TaskCard"
 
 const Tasks = () => {
@@ -91,13 +91,6 @@ const Tasks = () => {
           </div>
           </DragOverlay>
         </DndContext>
-        <div>
-          test
-          {tasks.map((task) => {
-            if(task.id === "2")
-            return task.title
-          })}
-        </div>
       </div>
     </div>
   )

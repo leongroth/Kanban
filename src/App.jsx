@@ -7,6 +7,7 @@ import { auth } from './firebase.jsx'
 import Navbar from './components/Navbar.jsx'
 import { useEffect, useState } from 'react'
 import Test from './components/Test.jsx'
+import KanbanTest from './components/KanbanTest.jsx'
 
 
 
@@ -24,6 +25,7 @@ const App = () => {
         {path: "/", element: <Tasks />},
         {path: "/summary", element: <Summary />},
         {path: "/test", element: <Test />},
+        {path: "/kanbantest", element: <KanbanTest />}
         ])
 
   localStorage.setItem('test', JSON.stringify("acting"))
