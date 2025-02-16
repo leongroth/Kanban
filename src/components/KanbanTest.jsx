@@ -8,7 +8,7 @@ const KanbanTest = () => {
     const [containers, setContainers] = useState([
         {
             id: 'container-1',
-            title: "Container 1",
+            title: "Literatur",
             items: [{
                 id: "item-1",
                 title: "Item 1"
@@ -16,7 +16,7 @@ const KanbanTest = () => {
         },
         {
             id: 'container-2',
-            title: "Container 2",
+            title: "Møder",
             items: [{
                 id: "item-2",
                 title: "Item 2"

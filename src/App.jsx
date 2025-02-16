@@ -8,6 +8,7 @@ import Navbar from './components/Navbar.jsx'
 import { useEffect, useState } from 'react'
 import Test from './components/Test.jsx'
 import KanbanTest from './components/KanbanTest.jsx'
+import Backlog from './components/Backlog.jsx'
 
 
 
@@ -25,7 +26,8 @@ const App = () => {
         {path: "/", element: <Tasks />},
         {path: "/summary", element: <Summary />},
         {path: "/test", element: <Test />},
-        {path: "/kanbantest", element: <KanbanTest />}
+        {path: "/kanbantest", element: <KanbanTest />},
+        {path: "/backlog", element: <Backlog />}
         ])
 
   localStorage.setItem('test', JSON.stringify("acting"))

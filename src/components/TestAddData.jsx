@@ -19,7 +19,6 @@ const TestAddData = () => {
 
     useEffect(() => {
         const query = ref(db, "/tasks")
-        tasks.sort((a, b) => a.priority - b.priority)
         return onValue(query, (snapshot) => {
             setTasks([])
             snapshot.forEach((childsnapshot) => {
