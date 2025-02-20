@@ -9,16 +9,45 @@ const Backlog = () => {
 
     const [tag, setTag] = useState()
     const [categories, setCategories] = useState([])
+    const [tasks, setTasks] = useState([])
+    const [data, setData] = useState([])
 
 
     useEffect(() => {
-        const query = ref(db, "/categories")
-        return onValue(query, (snapshot) => {
+        const categoriesData = ref(db, "/categories")
+        onValue(categoriesData, (snapshot) => {
             setCategories([])
             snapshot.forEach((childsnapshot) => {
                 const key = childsnapshot.key
                 const category = childsnapshot.val().tag
                 setCategories((categories) => [...categories, {key: key, category: category}])
+            })
+        })
+
+        const tasksData = ref(db, "/tasks")
+        onValue(tasksData, (snapshot) => {
+            setTasks([])
+            snapshot.forEach((childsnapshot) => {
+                const key = childsnapshot.key
+                const data = childsnapshot.val()
+                if(data.location === "backlog"){
+                    setTasks((tasks) => [...tasks, {key: key, data: data}])
+                }
+            })
+        })
+
+        categories.map((category) => {
+            const store = []
+            tasks.map((task) => {
+                if(task.data.category === category.category){
+                    store.push(task)
+                    const column = {
+                        id: category.key,
+                        title: category.category,
+                        tasks: store
+                    }
+                    setData((data) => [...data, column])
+                }
             })
         })
     }, [])

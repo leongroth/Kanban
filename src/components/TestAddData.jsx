@@ -9,6 +9,7 @@ const TestAddData = () => {
     const [tasks, setTasks] = useState([])
 
 
+
     const submitData = () => {
         push(ref(db, "/tasks"), {
             description: description,
@@ -27,9 +28,7 @@ const TestAddData = () => {
                 const priority = Number(data.priority)
                 
                 const task = {key: key, description: data.description, deadline: data.deadline, priority: priority}
-                if(tasks.indexOf(task) == -1){
-                    setTasks((tasks) => [...tasks, task])
-                }
+                setTasks((tasks) => [...tasks, task])
             })
         })
     }, [])

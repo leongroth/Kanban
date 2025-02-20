@@ -3,12 +3,13 @@ import Tasks from './components/Tasks.jsx'
 import Summary from './components/Summary.jsx'
 import UserButton from './components/UserButton.jsx'
 import { onAuthStateChanged } from 'firebase/auth'
-import { auth } from './firebase.jsx'
+import { auth, db } from './firebase.jsx'
 import Navbar from './components/Navbar.jsx'
 import { useEffect, useState } from 'react'
 import Test from './components/Test.jsx'
 import KanbanTest from './components/KanbanTest.jsx'
 import Backlog from './components/Backlog.jsx'
+import { child, onValue, ref } from 'firebase/database'
 
 
 
