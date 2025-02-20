@@ -8,17 +8,17 @@ import { db } from '../firebase'
 const Backlog = () => {
 
     const [tag, setTag] = useState()
-    const [backlog, setBacklog] = useState([])
+    const [categories, setCategories] = useState([])
 
 
     useEffect(() => {
         const query = ref(db, "/categories")
         return onValue(query, (snapshot) => {
-            setBacklog([])
+            setCategories([])
             snapshot.forEach((childsnapshot) => {
                 const key = childsnapshot.key
                 const category = childsnapshot.val().tag
-                setBacklog((backlog) => [...backlog, {key: key, category: category}])
+                setCategories((categories) => [...categories, {key: key, category: category}])
             })
         })
     }, [])
@@ -38,11 +38,11 @@ const Backlog = () => {
 
     
   return (
-    <div className='bg-red-200 w-screen h-[93vh] p-5'>
+    <div className='w-screen h-[93vh] p-5'>
       <div className='flex'>
         <DndContext sensors={sensors} collisionDetection={closestCorners} >
             <div className='flex gap-2'>
-                {backlog.map((item) => (
+                {categories.map((item) => (
                     <div>{item.category}</div>
                 ))}
             </div>
