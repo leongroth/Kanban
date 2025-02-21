@@ -44,16 +44,11 @@ const Backlog = () => {
     useEffect(() => {
         setData([])
         categories.map((category) => {
-            const tasklist = tasks.map((task) => task.category === category.category)
-            setData((data) => [...data, {
-                id: category.key,
-                title: category.category,
-                tasks: tasklist
-            }])
+            let content = [tasks.map((task) => task.category === category.category)]
+            setData((data) => [...data, content])
         })
+        }, [tasks, categories])
         
-
-    }, [categories, tasks])
 
 
 
@@ -96,9 +91,14 @@ const Backlog = () => {
         </div>
       </div>
       <div>
+        data length
         {data.length}
         {data.map((item) => (
-            <div>{item.tasks.length}</div>
+            <div>
+                <div>{typeof item.tasks.description}</div>
+                <div>{item.tasks.length}</div>
+            </div>
+            
         ))}
         {tasks.map((task) => (
             <div>{task.key}</div>
