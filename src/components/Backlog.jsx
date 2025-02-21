@@ -17,6 +17,7 @@ const Backlog = () => {
         const categoriesData = ref(db, "/categories")
         onValue(categoriesData, (snapshot) => {
             setCategories([])
+            setData([])
             snapshot.forEach((childsnapshot) => {
                 const key = childsnapshot.key
                 const category = childsnapshot.val().tag
@@ -30,27 +31,29 @@ const Backlog = () => {
             snapshot.forEach((childsnapshot) => {
                 const key = childsnapshot.key
                 const data = childsnapshot.val()
+                const category = data.category
+                const description = data.description
                 if(data.location === "backlog"){
-                    setTasks((tasks) => [...tasks, {key: key, data: data}])
+                    setTasks((tasks) => [...tasks, {key: key, data: data, category: category, desc: description}])
                 }
             })
         })
 
-        categories.map((category) => {
-            const store = []
-            tasks.map((task) => {
-                if(task.data.category === category.category){
-                    store.push(task)
-                    const column = {
-                        id: category.key,
-                        title: category.category,
-                        tasks: store
-                    }
-                    setData((data) => [...data, column])
-                }
-            })
-        })
     }, [])
+
+    useEffect(() => {
+        setData([])
+        categories.map((category) => {
+            const tasklist = tasks.map((task) => task.category === category.category)
+            setData((data) => [...data, {
+                id: category.key,
+                title: category.category,
+                tasks: tasklist
+            }])
+        })
+        
+
+    }, [categories, tasks])
 
 
 
@@ -91,6 +94,16 @@ const Backlog = () => {
                 </Popover.Portal>
             </Popover.Root>
         </div>
+      </div>
+      <div>
+        {data.length}
+        {data.map((item) => (
+            <div>{item.tasks.length}</div>
+        ))}
+        {tasks.map((task) => (
+            <div>{task.key}</div>
+        ))}
+        {tasks.length}
       </div>
     </div>
   )
