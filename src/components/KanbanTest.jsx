@@ -52,6 +52,7 @@ const KanbanTest = () => {
 
     const handleDragMove = (event) => {
         const {active, over} = event
+        console.log(active.id.toString())
 
         //Handle Items Sorting
         if(active.id.toString().includes("item") && over?.id.toString().includes("item") && active && active.id !== over.id){

@@ -4,20 +4,21 @@ import { useSensors, useSensor, PointerSensor, closestCorners } from '@dnd-kit/c
 import React, { useEffect, useState } from 'react'
 import { ref, push, onValue, child } from 'firebase/database'
 import { db } from '../firebase'
+import AddCategory from './AddCategory'
+import { SortableContext } from '@dnd-kit/sortable'
+import CategoryContainer from './CategoryContainer'
 
 const Backlog = () => {
 
     const [tag, setTag] = useState()
     const [categories, setCategories] = useState([])
     const [tasks, setTasks] = useState([])
-    const [data, setData] = useState([])
 
 
     useEffect(() => {
         const categoriesData = ref(db, "/categories")
         onValue(categoriesData, (snapshot) => {
             setCategories([])
-            setData([])
             snapshot.forEach((childsnapshot) => {
                 const key = childsnapshot.key
                 const category = childsnapshot.val().tag
@@ -31,79 +32,40 @@ const Backlog = () => {
             snapshot.forEach((childsnapshot) => {
                 const key = childsnapshot.key
                 const data = childsnapshot.val()
-                const category = data.category
-                const description = data.description
                 if(data.location === "backlog"){
-                    setTasks((tasks) => [...tasks, {key: key, data: data, category: category, desc: description}])
+                    setTasks((tasks) => [...tasks, {key: key, data: data}])
                 }
             })
         })
 
     }, [])
-
-    useEffect(() => {
-        setData([])
-        categories.map((category) => {
-            let content = [tasks.map((task) => task.category === category.category)]
-            setData((data) => [...data, content])
-        })
-        }, [tasks, categories])
         
-
-
 
     const sensors = useSensors(
             useSensor(PointerSensor)
         )
 
 
-    const addCategory = () => {
-        push(ref(db, "/categories"), {
-            tag: tag
-        })
-    }
-
     
   return (
     <div className='w-screen h-[93vh] p-5'>
       <div className='flex'>
         <DndContext sensors={sensors} collisionDetection={closestCorners} >
-            <div className='flex gap-2'>
-                {categories.map((item) => (
-                    <div>{item.category}</div>
+            <SortableContext items={categories}>
+                {categories.map((category) => (
+                    <CategoryContainer title={category.category} />
                 ))}
-            </div>
+            </SortableContext>
         </DndContext>
-        <div className='w-[300px] h-fit relative'>
-            <Popover.Root>
-                <Popover.Trigger className="w-[200px] mx-[50px] h-[50px] text-lg font-semibold text-white bg-purple-500 hover:bg-purple-400 rounded-full">
-                    Add Category
-                </Popover.Trigger>
-                <Popover.Portal>
-                    <Popover.Positioner sideOffset={-50}>
-                        <Popover.Popup className="w-[300px] h-fit bg-[#EFEFEF] rounded-[20px] flex justify-center flex-col p-3 gap-3">
-                            <input type='text' placeholder='Category Title' className='h-[40px] rounded-[20px]' onChange={(e) => {setTag(e.target.value)}}/>
-                            <button className='bg-purple-400 w-[100px] h-[40px] text-lg font-semibold text-white rounded-full' onClick={addCategory}>Add</button>
-                        </Popover.Popup>
-                    </Popover.Positioner>
-                </Popover.Portal>
-            </Popover.Root>
-        </div>
+        <AddCategory />
       </div>
       <div>
-        data length
-        {data.length}
-        {data.map((item) => (
-            <div>
-                <div>{typeof item.tasks.description}</div>
-                <div>{item.tasks.length}</div>
-            </div>
-            
-        ))}
         {tasks.map((task) => (
             <div>{task.key}</div>
         ))}
         {tasks.length}
+        Category Length
+        {categories.length}
       </div>
     </div>
   )
