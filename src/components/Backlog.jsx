@@ -13,7 +13,9 @@ const Backlog = () => {
     const [tag, setTag] = useState()
     const [categories, setCategories] = useState([])
     const [tasks, setTasks] = useState([])
+    const [activeId, setActiveId] = useState(1)
 
+    
 
     useEffect(() => {
         const categoriesData = ref(db, "/categories")
@@ -45,12 +47,29 @@ const Backlog = () => {
             useSensor(PointerSensor)
         )
 
+    const handleDragStart = (event) => {
+        const {active} = event
+        const {id} = active
+        setActiveId(id)
+        console.log(activeId)
+    }
+
+    const handleDragMove = (event) => {
+        const {active} = event
+        const {id} = active
+        console.log("test")
+    }
+
+    const handleDragEnd = (event) => {
+        console.log("test2")
+    } 
+
 
     
   return (
     <div className='w-screen h-[93vh] p-5'>
       <div className='flex'>
-        <DndContext sensors={sensors} collisionDetection={closestCorners} >
+        <DndContext sensors={sensors} collisionDetection={closestCorners} onDragStart={handleDragStart} onDragMove={handleDragMove} onDragEnd={handleDragEnd} >
             <SortableContext items={categories}>
                 {categories.map((category) => (
                     <CategoryContainer title={category.category} />
